@@ -9,6 +9,7 @@ use App\STT_LoSX;
 use App\DaiLy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Crypt;
 
 class KiemTraController extends Controller
 {
@@ -18,9 +19,10 @@ class KiemTraController extends Controller
         try{
             $data = $request->Data;
             // giải mã Data
-            $data = base64_decode($data);
+            $data = decrypt($data);
             // json_decode Data
             $data = json_decode($data);
+            
             $MaLo = $data->MaLo;
             $MaSP = $data->MaSP;
             $STT = $data->STT;
@@ -36,10 +38,11 @@ class KiemTraController extends Controller
             $result['NSX'] = $sp_losx->NSX->format('d/m/Y');
             $result['HSD'] = $sp_losx->HSD->format('d/m/Y');
             $result['TenDL'] = $TenDL;
+            $result['NhaSX'] = env('APP_NAME');
 
             $result = json_encode($result);
             return response($result,200);
-	}catch (\Exception $e){
+	    }catch (\Exception $e){
             return response('Sản phẩm chưa được xác thực!',400);
         };
 

@@ -10,11 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::group(['prefix'=>'admin', 'middleware'=>'auth'],function (){
 
-Route::group(['prefix'=>'admin'],function (){
-
-    Route::get('/','LoSXController@getThem');
-
+    Route::get('/','LoSXController@getDanhSach');
     Route::group(['prefix'=>'losanxuat'],function (){
         Route::get('danhsach','LoSXController@getDanhSach');
         Route::get('them','LoSXController@getThem');
@@ -50,3 +48,7 @@ Route::group(['prefix'=>'admin'],function (){
     });
 });
 
+Auth::routes();
+Route::get('/logout', 'Auth\LoginController@logout');
+
+Route::get('/home', 'HomeController@index')->name('home');
