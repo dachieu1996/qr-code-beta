@@ -12,10 +12,11 @@
 
     <ul class="nav navbar-top-links navbar-right">
         <!-- /.dropdown -->
+        
         <li class="dropdown">
 
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                <span>{{Auth::user()->name}}</span>  <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
             </a>
             @if(Auth::check())
             <ul class="dropdown-menu dropdown-user">
@@ -28,7 +29,7 @@
             @endif
 
             <!-- /.dropdown-user -->
-        </li>
+        </li> 
         <!-- /.dropdown -->
     </ul>
     <!-- /.navbar-top-links -->
